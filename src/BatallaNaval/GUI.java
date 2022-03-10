@@ -13,9 +13,13 @@ import java.awt.event.ActionListener;
 public class GUI extends JFrame {
 
 	private Header headerProject;
+	private String espacio = "                    ";
 	GridLayout gridLayout = new GridLayout(10 ,10, 5, 5);
 	private Escucha escucha;
 	private Casilla casilla[][] = new Casilla[10][10];
+	private JPanel panelPrincipal, panelOpciones, tableroCompleto;
+	private JButton ayuda, jugar;
+	private JTextArea mensaje;
 
 	/**
 	 * Constructor of GUI class
@@ -37,11 +41,16 @@ public class GUI extends JFrame {
 	 * create Listener and control Objects used for the GUI class
 	 */
 	private void initGUI() {
+		panelPrincipal = new JPanel();
+		panelOpciones = new JPanel();
+
 		//Set up JFrame Container's Layout
-		this.getContentPane().setLayout(gridLayout);
+		panelPrincipal.setLayout(gridLayout);
+		panelOpciones.setLayout(new GridBagLayout());
+		GridBagConstraints constraints = new GridBagConstraints();
+
 		//Create Listener Object and Control Object
 		escucha = new Escucha();
-		//Set up JComponents
 
 		for(int i=0; i<gridLayout.getRows(); i++)
 		{
@@ -50,9 +59,180 @@ public class GUI extends JFrame {
 				casilla[i][j] = new Casilla(i, j, "agua");
 				casilla[i][j].setPreferredSize(new Dimension(50,50));
 				casilla[i][j].addActionListener(escucha);
-				this.add(casilla[i][j]);
+				panelPrincipal.add(casilla[i][j]);
 			}
 		}
+
+		//Set up JComponents
+
+		mensaje = new JTextArea();
+		mensaje.setText(espacio);
+		mensaje.setEditable(false);
+		mensaje.setBackground(Color.BLUE);
+		constraints.gridx = 0;
+		constraints.gridy = 0;
+		constraints.gridwidth = 1;
+		constraints.fill = GridBagConstraints.BOTH;
+		constraints.anchor = GridBagConstraints.CENTER;
+		panelOpciones.add(mensaje, constraints);
+
+		mensaje = new JTextArea();
+		mensaje.setText(espacio);
+		mensaje.setEditable(false);
+		mensaje.setBackground(Color.BLUE);
+		constraints.gridx = 1;
+		constraints.gridy = 0;
+		constraints.gridwidth = 1;
+		constraints.fill = GridBagConstraints.BOTH;
+		constraints.anchor = GridBagConstraints.CENTER;
+		panelOpciones.add(mensaje, constraints);
+
+		mensaje = new JTextArea();
+		mensaje.setText(espacio);
+		mensaje.setEditable(false);
+		mensaje.setBackground(Color.BLUE);
+		constraints.gridx = 2;
+		constraints.gridy = 0;
+		constraints.gridwidth = 1;
+		constraints.fill = GridBagConstraints.BOTH;
+		constraints.anchor = GridBagConstraints.CENTER;
+		panelOpciones.add(mensaje, constraints);
+
+		mensaje = new JTextArea();
+		mensaje.setText(espacio);
+		mensaje.setEditable(false);
+		mensaje.setBackground(Color.BLUE);
+		constraints.gridx = 0;
+		constraints.gridy = 1;
+		constraints.gridwidth = 1;
+		constraints.fill = GridBagConstraints.BOTH;
+		constraints.anchor = GridBagConstraints.CENTER;
+		panelOpciones.add(mensaje, constraints);
+
+		ayuda = new JButton("Ayuda");
+		ayuda.addActionListener(escucha);
+		constraints.gridx = 1;
+		constraints.gridy = 1;
+		constraints.gridwidth = 1;
+		constraints.fill = GridBagConstraints.BOTH;
+		constraints.anchor = GridBagConstraints.CENTER;
+		panelOpciones.add(ayuda, constraints);
+
+		mensaje = new JTextArea();
+		mensaje.setText(espacio);
+		mensaje.setEditable(false);
+		mensaje.setBackground(Color.BLUE);
+		constraints.gridx = 2;
+		constraints.gridy = 1;
+		constraints.gridwidth = 1;
+		constraints.fill = GridBagConstraints.BOTH;
+		constraints.anchor = GridBagConstraints.CENTER;
+		panelOpciones.add(mensaje, constraints);
+
+		mensaje = new JTextArea();
+		mensaje.setText(espacio);
+		mensaje.setEditable(false);
+		mensaje.setBackground(Color.BLUE);
+		constraints.gridx = 0;
+		constraints.gridy = 2;
+		constraints.gridwidth = 1;
+		constraints.fill = GridBagConstraints.BOTH;
+		constraints.anchor = GridBagConstraints.CENTER;
+		panelOpciones.add(mensaje, constraints);
+
+		mensaje = new JTextArea();
+		mensaje.setText(espacio);
+		mensaje.setEditable(false);
+		mensaje.setBackground(Color.BLUE);
+		constraints.gridx = 1;
+		constraints.gridy = 2;
+		constraints.gridwidth = 1;
+		constraints.fill = GridBagConstraints.BOTH;
+		constraints.anchor = GridBagConstraints.CENTER;
+		panelOpciones.add(mensaje, constraints);
+
+		mensaje = new JTextArea();
+		mensaje.setText(espacio);
+		mensaje.setEditable(false);
+		mensaje.setBackground(Color.BLUE);
+		constraints.gridx = 2;
+		constraints.gridy = 2;
+		constraints.gridwidth = 1;
+		constraints.fill = GridBagConstraints.BOTH;
+		constraints.anchor = GridBagConstraints.CENTER;
+		panelOpciones.add(mensaje, constraints);
+
+		mensaje = new JTextArea();
+		mensaje.setText(espacio);
+		mensaje.setEditable(false);
+		mensaje.setBackground(Color.BLUE);
+		constraints.gridx = 0;
+		constraints.gridy = 3;
+		constraints.gridwidth = 1;
+		constraints.fill = GridBagConstraints.BOTH;
+		constraints.anchor = GridBagConstraints.CENTER;
+		panelOpciones.add(mensaje, constraints);
+
+		jugar = new JButton("Jugar");
+		jugar.addActionListener(escucha);
+		constraints.gridx = 1;
+		constraints.gridy = 3;
+		constraints.gridwidth = 1;
+		constraints.fill = GridBagConstraints.BOTH;
+		constraints.anchor = GridBagConstraints.CENTER;
+		panelOpciones.add(jugar, constraints);
+
+		mensaje = new JTextArea();
+		mensaje.setText(espacio);
+		mensaje.setEditable(false);
+		mensaje.setBackground(Color.BLUE);
+		constraints.gridx = 2;
+		constraints.gridy = 3;
+		constraints.gridwidth = 1;
+		constraints.fill = GridBagConstraints.BOTH;
+		constraints.anchor = GridBagConstraints.CENTER;
+		panelOpciones.add(mensaje, constraints);
+
+		mensaje = new JTextArea();
+		mensaje.setText(espacio);
+		mensaje.setEditable(false);
+		mensaje.setBackground(Color.BLUE);
+		constraints.gridx = 0;
+		constraints.gridy = 4;
+		constraints.gridwidth = 1;
+		constraints.fill = GridBagConstraints.BOTH;
+		constraints.anchor = GridBagConstraints.CENTER;
+		panelOpciones.add(mensaje, constraints);
+
+		mensaje = new JTextArea();
+		mensaje.setText(espacio);
+		mensaje.setEditable(false);
+		mensaje.setBackground(Color.BLUE);
+		constraints.gridx = 1;
+		constraints.gridy = 4;
+		constraints.gridwidth = 1;
+		constraints.fill = GridBagConstraints.BOTH;
+		constraints.anchor = GridBagConstraints.CENTER;
+		panelOpciones.add(mensaje, constraints);
+
+		mensaje = new JTextArea();
+		mensaje.setText(espacio);
+		mensaje.setEditable(false);
+		mensaje.setBackground(Color.BLUE);
+		constraints.gridx = 2;
+		constraints.gridy = 4;
+		constraints.gridwidth = 1;
+		constraints.fill = GridBagConstraints.BOTH;
+		constraints.anchor = GridBagConstraints.CENTER;
+		panelOpciones.add(mensaje, constraints);
+
+		tableroCompleto = new JPanel();
+		tableroCompleto.setLayout(new BorderLayout());
+		tableroCompleto.add(panelPrincipal, BorderLayout.EAST);
+		tableroCompleto.add(panelOpciones, BorderLayout.WEST);
+
+
+		this.setContentPane(tableroCompleto);
 	}
 
 	/**
@@ -73,10 +253,6 @@ public class GUI extends JFrame {
 	{
 		@Override
 		public void actionPerformed(ActionEvent objectEvent) {
-			if(objectEvent.getSource() == null)
-			{
-				JOptionPane.showMessageDialog(null, "Click en ninguna parte");
-			}
 			for(int i=0; i<gridLayout.getRows(); i++)
 			{
 				for(int j=0; j<gridLayout.getColumns(); j++)
