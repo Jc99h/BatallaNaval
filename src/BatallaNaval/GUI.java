@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Objects;
 
 /**
  * This class is used for ...
@@ -19,8 +20,12 @@ public class GUI extends JFrame {
 	private Escucha escucha;
 	private Casilla casilla[][] = new Casilla[10][10];
 	private JPanel panelPrincipal, panelOpciones, tableroCompleto;
-	private JButton ayuda, jugar, portavion, submarino, destructor, fragata;
+	private JButton ayuda, jugar, botonPortavion, botonSubmarino, botonDestructor, botonFragata;
 	private JTextArea mensaje;
+	private boolean clickBotonPortavion = false;
+	private ModelBatallaNaval modelBatallaNaval;
+	private Casilla guardarCasilla = new Casilla(0,0,"");
+	private Barco portavion = new Barco("portavion", 4);
 
 	/**
 	 * Constructor of GUI class
@@ -50,6 +55,7 @@ public class GUI extends JFrame {
 		panelOpciones.setLayout(new GridBagLayout());
 
 		//Create Listener Object and Control Object
+		modelBatallaNaval = new ModelBatallaNaval();
 		escucha = new Escucha();
 
 		for(int i=0; i<gridLayout.getRows(); i++)
@@ -281,14 +287,14 @@ public class GUI extends JFrame {
 		constraints.anchor = GridBagConstraints.CENTER;
 		panelOpciones.add(mensaje, constraints);
 
-		portavion = new JButton("Portavion");
-		portavion.addActionListener(escucha);
+		botonPortavion = new JButton("Portavion: "+ modelBatallaNaval.getCantidadPortavion());
+		botonPortavion.addActionListener(escucha);
 		constraints.gridx = 1;
 		constraints.gridy = 1;
 		constraints.gridwidth = 1;
 		constraints.fill = GridBagConstraints.BOTH;
 		constraints.anchor = GridBagConstraints.CENTER;
-		panelOpciones.add(portavion, constraints);
+		panelOpciones.add(botonPortavion, constraints);
 
 		mensaje = new JTextArea();
 		mensaje.setText(espacio);
@@ -345,14 +351,14 @@ public class GUI extends JFrame {
 		constraints.anchor = GridBagConstraints.CENTER;
 		panelOpciones.add(mensaje, constraints);
 
-		submarino = new JButton("Submarino");
-		submarino.addActionListener(escucha);
+		botonSubmarino = new JButton("Submarino: "+modelBatallaNaval.getCantidadSubmarino());
+		botonSubmarino.addActionListener(escucha);
 		constraints.gridx = 1;
 		constraints.gridy = 3;
 		constraints.gridwidth = 1;
 		constraints.fill = GridBagConstraints.BOTH;
 		constraints.anchor = GridBagConstraints.CENTER;
-		panelOpciones.add(submarino, constraints);
+		panelOpciones.add(botonSubmarino, constraints);
 
 		mensaje = new JTextArea();
 		mensaje.setText(espacio);
@@ -409,14 +415,14 @@ public class GUI extends JFrame {
 		constraints.anchor = GridBagConstraints.CENTER;
 		panelOpciones.add(mensaje, constraints);
 
-		destructor = new JButton("Destructor");
-		destructor.addActionListener(escucha);
+		botonDestructor = new JButton("Destructor: "+modelBatallaNaval.getCantidadDestructor());
+		botonDestructor.addActionListener(escucha);
 		constraints.gridx = 1;
 		constraints.gridy = 5;
 		constraints.gridwidth = 1;
 		constraints.fill = GridBagConstraints.BOTH;
 		constraints.anchor = GridBagConstraints.CENTER;
-		panelOpciones.add(destructor, constraints);
+		panelOpciones.add(botonDestructor, constraints);
 
 		mensaje = new JTextArea();
 		mensaje.setText(espacio);
@@ -473,14 +479,14 @@ public class GUI extends JFrame {
 		constraints.anchor = GridBagConstraints.CENTER;
 		panelOpciones.add(mensaje, constraints);
 
-		fragata = new JButton("Fragata");
-		fragata.addActionListener(escucha);
+		botonFragata = new JButton("Fragata: "+modelBatallaNaval.getCantidadFragata());
+		botonFragata.addActionListener(escucha);
 		constraints.gridx = 1;
 		constraints.gridy = 7;
 		constraints.gridwidth = 1;
 		constraints.fill = GridBagConstraints.BOTH;
 		constraints.anchor = GridBagConstraints.CENTER;
-		panelOpciones.add(fragata, constraints);
+		panelOpciones.add(botonFragata, constraints);
 
 		mensaje = new JTextArea();
 		mensaje.setText(espacio);
@@ -548,7 +554,7 @@ public class GUI extends JFrame {
 	{
 		@Override
 		public void actionPerformed(ActionEvent objectEvent) {
-			for(int i=0; i<gridLayout.getRows(); i++)
+			/*for(int i=0; i<gridLayout.getRows(); i++)
 			{
 				for(int j=0; j<gridLayout.getColumns(); j++)
 				{
@@ -557,11 +563,100 @@ public class GUI extends JFrame {
 						JOptionPane.showMessageDialog(null, "Fila: "+(casilla[i][j].getFila()+1) + "\nColumna: "+(casilla[i][j].getColumna()+1) + "\nTipo: " +casilla[i][j].getTipo());
 					}
 				}
-			}
+			}*/
 
 			if(objectEvent.getSource() == jugar)
 			{
 				actualizarGUI();
+			}
+			if(objectEvent.getSource() == botonPortavion)
+			{
+				/*botonPortavion.removeActionListener(escucha);
+				botonSubmarino.removeActionListener(escucha);
+				botonDestructor.removeActionListener(escucha);
+				botonFragata.removeActionListener(escucha);*/
+				panelOpciones.removeAll();
+				revalidate();
+				repaint();
+				JOptionPane.showMessageDialog(null, "El portavion ocupa 4 casillas seguidas, escogelas");
+				clickBotonPortavion = true;
+			}
+			for(int i=0; i<gridLayout.getRows(); i++)
+			{
+				for(int j=0; j<gridLayout.getColumns(); j++)
+				{
+					if(objectEvent.getSource() == casilla[i][j] && clickBotonPortavion == true)
+					{
+
+						if(modelBatallaNaval.getFlag()==0)
+						{
+							guardarCasilla.setFila(i);
+							guardarCasilla.setColumna(j);
+							guardarCasilla.setTipo(portavion.getTipoBarco());
+							casilla[i][j].setBackground(Color.GREEN);
+							modelBatallaNaval.setFlag(modelBatallaNaval.getFlag()+1);
+							portavion.setVida(portavion.getVida()-1);
+						}
+						else if(modelBatallaNaval.getFlag()==1 && (objectEvent.getSource() == casilla[guardarCasilla.getFila()+1][guardarCasilla.getColumna()] || objectEvent.getSource() == casilla[guardarCasilla.getFila()-1][guardarCasilla.getColumna()] || objectEvent.getSource() == casilla[guardarCasilla.getFila()][guardarCasilla.getColumna()+1] || objectEvent.getSource() == casilla[guardarCasilla.getFila()][guardarCasilla.getColumna()-1]))
+						{
+							casilla[i][j].setBackground(Color.GREEN);
+							modelBatallaNaval.posicion(i, guardarCasilla.getFila(), j, guardarCasilla.getColumna());
+							guardarCasilla.setFila(i);
+							guardarCasilla.setColumna(j);
+							guardarCasilla.setTipo(portavion.getTipoBarco());
+							modelBatallaNaval.setFlag(modelBatallaNaval.getFlag()+1);
+							portavion.setVida(portavion.getVida()-1);
+							JOptionPane.showMessageDialog(null, "La posicion del barco es "+modelBatallaNaval.getOrientacionBarco());
+						}
+						else if(modelBatallaNaval.getFlag()==2)
+						{
+							if(Objects.equals(modelBatallaNaval.getOrientacionBarco(), "horizontal"))
+							{
+								if(objectEvent.getSource() == casilla[guardarCasilla.getFila()][guardarCasilla.getColumna()+1] || objectEvent.getSource() == casilla[guardarCasilla.getFila()][guardarCasilla.getColumna()-1])
+								{
+									casilla[i][j].setBackground(Color.GREEN);
+									guardarCasilla.setFila(i);
+									guardarCasilla.setColumna(j);
+									portavion.setVida(portavion.getVida()-1);
+									JOptionPane.showMessageDialog(null, "Vamos muy bien");
+								}
+								else
+								{
+									JOptionPane.showMessageDialog(null, "Imposible posicionar la casilla del barco aqui");
+								}
+							}
+							else if(Objects.equals(modelBatallaNaval.getOrientacionBarco(), "vertical"))
+							{
+								if(objectEvent.getSource() == casilla[guardarCasilla.getFila()+1][guardarCasilla.getColumna()] || objectEvent.getSource() == casilla[guardarCasilla.getFila()-1][guardarCasilla.getColumna()])
+								{
+									casilla[i][j].setBackground(Color.GREEN);
+									guardarCasilla.setFila(i);
+									guardarCasilla.setColumna(j);
+									portavion.setVida(portavion.getVida()-1);
+									JOptionPane.showMessageDialog(null, "Vamos muy bien");
+								}
+								else
+								{
+									JOptionPane.showMessageDialog(null, "Imposible posicionar la casilla del barco aqui");
+								}
+							}
+						}
+						else
+						{
+							JOptionPane.showMessageDialog(null, "Imposible posicionar la casilla del barco aqui");
+						}
+						if(portavion.getVida()==0)
+						{
+							JOptionPane.showMessageDialog(null, "Posicion correcta, continua con otro barco");
+							modelBatallaNaval.setCantidadPortavion(0);
+							actualizarGUI();
+							botonPortavion.setBackground(Color.gray);
+							botonPortavion.removeActionListener(escucha);
+							clickBotonPortavion = false;
+							modelBatallaNaval.setFlag(10);
+						}
+					}
+				}
 			}
 		}
 	}
