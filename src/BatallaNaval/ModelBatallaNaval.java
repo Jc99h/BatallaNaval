@@ -1,80 +1,105 @@
 package BatallaNaval;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class ModelBatallaNaval {
 
-	private int flag;
-	private String orientacionBarco;
-	private int cantidadPortavion, cantidadSubmarino, cantidadDestructor, cantidadFragata;
+    private int flag;
+    private int cantidadPortavion, cantidadSubmarino, cantidadDestructor, cantidadFragata;
+    public ArrayList<Barco> barcosDeJugadores, barcosDeComputador;
 
-	public ModelBatallaNaval()
-	{
-		flag = 0;
-		orientacionBarco = "";
-		cantidadPortavion = 1;
-		cantidadSubmarino = 2;
-		cantidadDestructor = 3;
-		cantidadFragata = 4;
-	}
+    public ArrayList<Barco> portavionesPorPoner, submarinosPorPoner, destructoresPorPoner, fragatasPorPoner;
 
-	public int getFlag() {
-		return flag;
-	}
+    public ModelBatallaNaval() {
+        flag = 0;
+        cantidadPortavion = 1;
+        cantidadSubmarino = 2;
+        cantidadDestructor = 3;
+        cantidadFragata = 4;
 
-	public void setFlag(int flag) {
-		this.flag = flag;
-	}
+        ArrayList<Integer> cantidades = new ArrayList<>();
+        barcosDeJugadores = new ArrayList<>();
+        barcosDeComputador = new ArrayList<>();
 
-	public String getOrientacionBarco() {
-		return orientacionBarco;
-	}
+        cantidades.add(cantidadPortavion);
+        cantidades.add(cantidadSubmarino);
+        cantidades.add(cantidadDestructor);
+        cantidades.add(cantidadFragata);
 
-	public void setOrientacionBarco(String orientacionBarco) {
-		this.orientacionBarco = orientacionBarco;
-	}
+        portavionesPorPoner = new ArrayList<>();
+        submarinosPorPoner = new ArrayList<>();
+        destructoresPorPoner = new ArrayList<>();
+        fragatasPorPoner = new ArrayList<>();
 
-	public int getCantidadPortavion() {
-		return cantidadPortavion;
-	}
+        for (int i = 0; i < cantidades.size(); i++) {
+            for (int j = 0; j < cantidades.get(i); j++) {
 
-	public void setCantidadPortavion(int cantidadPortavion) {
-		this.cantidadPortavion = cantidadPortavion;
-	}
+                switch (i) {
+                    case 0:
+                        barcosDeJugadores.add(new Barco("portavion", 4));
+                        barcosDeComputador.add(new Barco("portavion", 4));
+                        portavionesPorPoner.add(new Barco("portavion", 4));
+                        break;
+                    case 1:
+                        barcosDeJugadores.add(new Barco("submarino", 3));
+                        barcosDeComputador.add(new Barco("submarino", 3));
+                        submarinosPorPoner.add(new Barco("submarino", 3));
+                        break;
+                    case 2:
+                        barcosDeJugadores.add(new Barco("destructor", 2));
+                        barcosDeComputador.add(new Barco("destructor", 2));
+                        destructoresPorPoner.add(new Barco("destructor", 2));
+                        break;
+                    case 3:
+                        barcosDeJugadores.add(new Barco("fragata", 1));
+                        barcosDeComputador.add(new Barco("fragata", 1));
+                        fragatasPorPoner.add(new Barco("fragata", 1));
+                    default:
+                        break;
+                }
+            }
+        }
+    }
 
-	public int getCantidadSubmarino() {
-		return cantidadSubmarino;
-	}
+    public int getFlag() {
+        return flag;
+    }
 
-	public void setCantidadSubmarino(int cantidadSubmarino) {
-		this.cantidadSubmarino = cantidadSubmarino;
-	}
+    public void setFlag(int flag) {
+        this.flag = flag;
+    }
 
-	public int getCantidadDestructor() {
-		return cantidadDestructor;
-	}
+    public int getCantidadPortavion() {
+        return cantidadPortavion;
+    }
 
-	public void setCantidadDestructor(int cantidadDestructor) {
-		this.cantidadDestructor = cantidadDestructor;
-	}
+    public void setCantidadPortavion(int cantidadPortavion) {
+        this.cantidadPortavion = cantidadPortavion;
+    }
 
-	public int getCantidadFragata() {
-		return cantidadFragata;
-	}
+    public int getCantidadSubmarino() {
+        return cantidadSubmarino;
+    }
 
-	public void setCantidadFragata(int cantidadFragata) {
-		this.cantidadFragata = cantidadFragata;
-	}
+    public void setCantidadSubmarino(int cantidadSubmarino) {
+        this.cantidadSubmarino = cantidadSubmarino;
+    }
 
-	public void posicion(int num1, int num2, int num3, int num4)
-	{
-		if(num1 == num2)
-		{
-			orientacionBarco = "horizontal";
-		}
-		else if(num3 == num4)
-		{
-			orientacionBarco = "vertical";
-		}
-	}
+    public int getCantidadDestructor() {
+        return cantidadDestructor;
+    }
+
+    public void setCantidadDestructor(int cantidadDestructor) {
+        this.cantidadDestructor = cantidadDestructor;
+    }
+
+    public int getCantidadFragata() {
+        return cantidadFragata;
+    }
+
+    public void setCantidadFragata(int cantidadFragata) {
+        this.cantidadFragata = cantidadFragata;
+    }
 }
