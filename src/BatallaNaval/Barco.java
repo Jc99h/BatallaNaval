@@ -2,6 +2,13 @@ package BatallaNaval;
 
 import java.util.ArrayList;
 
+/**
+ * This class is used for ...
+ *
+ * @author Camilo Ordoñez 1827625-2711 juan.ordonez.hurtado@correounivalle.edu.co
+ * @author Danny lopez 1941453-2711  danny.cardenas@correounivalle.edu.co
+ * @version @version v.1.0.0 date:06/03/2022
+ */
 public class Barco {
 
     private String tipoBarco, orientacionBarco;

@@ -10,6 +10,7 @@ import java.util.Objects;
  * This class is used for ...
  *
  * @author Camilo Ordoñez 1827625-2711 juan.ordonez.hurtado@correounivalle.edu.co
+ * @author Danny lopez 1941453-2711  danny.cardenas@correounivalle.edu.co
  * @version @version v.1.0.0 date:06/03/2022
  */
 public class GUI extends JFrame {
@@ -180,10 +181,10 @@ public class GUI extends JFrame {
                 panelOpciones.add(mensaje, constraints);
             }
         }
-			  botonPortavion.setBackground(Color.magenta);
-				botonSubmarino.setBackground(Color.green);
-				botonDestructor.setBackground(Color.yellow);
-				botonFragata.setBackground(Color.red);
+        botonPortavion.setBackground(Color.magenta);
+        botonSubmarino.setBackground(Color.green);
+        botonDestructor.setBackground(Color.yellow);
+        botonFragata.setBackground(Color.red);
 
         revalidate();
         repaint();
@@ -301,33 +302,23 @@ public class GUI extends JFrame {
                         casillaClickeada.setFila(i);
                         casillaClickeada.setColumna(j);
                         casillaClickeada.setTipo(barco.getTipoBarco());
-												casillas[i][j].removeActionListener(escucha);
+                        casillas[i][j].removeActionListener(escucha);
 
-												if(Objects.equals(barco.getTipoBarco(), "portavion"))
-												{
-													casillas[i][j].setBackground(Color.magenta);
-												}
-												else
-												{
-													if (Objects.equals(barco.getTipoBarco(), "submarino"))
-													{
-														casillas[i][j].setBackground(Color.green);
-													}
-													else
-													{
-														if (Objects.equals(barco.getTipoBarco(), "destructor"))
-														{
-															casillas[i][j].setBackground(Color.yellow);
-														}
-														else
-														{
-															if(Objects.equals(barco.getTipoBarco(), "fragata"))
-															{
-																casillas[i][j].setBackground(Color.red);
-															}
-														}
-													}
-												}
+                        if (Objects.equals(barco.getTipoBarco(), "portavion")) {
+                            casillas[i][j].setBackground(Color.magenta);
+                        } else {
+                            if (Objects.equals(barco.getTipoBarco(), "submarino")) {
+                                casillas[i][j].setBackground(Color.green);
+                            } else {
+                                if (Objects.equals(barco.getTipoBarco(), "destructor")) {
+                                    casillas[i][j].setBackground(Color.yellow);
+                                } else {
+                                    if (Objects.equals(barco.getTipoBarco(), "fragata")) {
+                                        casillas[i][j].setBackground(Color.red);
+                                    }
+                                }
+                            }
+                        }
 
 
                         //casillas[i][j].setBackground(Color.GREEN);
@@ -346,33 +337,23 @@ public class GUI extends JFrame {
                             casillaClickeada.setFila(i);
                             casillaClickeada.setColumna(j);
                             casillaClickeada.setTipo(barco.getTipoBarco());
-													  casillas[i][j].removeActionListener(escucha);
+                            casillas[i][j].removeActionListener(escucha);
 
-													if(Objects.equals(barco.getTipoBarco(), "portavion"))
-													{
-														casillas[i][j].setBackground(Color.magenta);
-													}
-													else
-													{
-														if (Objects.equals(barco.getTipoBarco(), "submarino"))
-														{
-															casillas[i][j].setBackground(Color.green);
-														}
-														else
-														{
-															if (Objects.equals(barco.getTipoBarco(), "destructor"))
-															{
-																casillas[i][j].setBackground(Color.yellow);
-															}
-															else
-															{
-																if(Objects.equals(barco.getTipoBarco(), "fragata"))
-																{
-																	casillas[i][j].setBackground(Color.red);
-																}
-															}
-														}
-													}
+                            if (Objects.equals(barco.getTipoBarco(), "portavion")) {
+                                casillas[i][j].setBackground(Color.magenta);
+                            } else {
+                                if (Objects.equals(barco.getTipoBarco(), "submarino")) {
+                                    casillas[i][j].setBackground(Color.green);
+                                } else {
+                                    if (Objects.equals(barco.getTipoBarco(), "destructor")) {
+                                        casillas[i][j].setBackground(Color.yellow);
+                                    } else {
+                                        if (Objects.equals(barco.getTipoBarco(), "fragata")) {
+                                            casillas[i][j].setBackground(Color.red);
+                                        }
+                                    }
+                                }
+                            }
                             casillas[i][j].setTipo(barco.getTipoBarco());
 
                             modelBatallaNaval.setFlag(modelBatallaNaval.getFlag() + 1);
@@ -385,36 +366,26 @@ public class GUI extends JFrame {
                         if (validarCasillaClickeada(barco, casillas[i][j], barco.getOrientacionBarco())) {
                             Casilla casillaClickeada = new Casilla(0, 0, "");
 
-													if(Objects.equals(barco.getTipoBarco(), "portavion"))
-													{
-														casillas[i][j].setBackground(Color.magenta);
-													}
-													else
-													{
-														if (Objects.equals(barco.getTipoBarco(), "submarino"))
-														{
-															casillas[i][j].setBackground(Color.green);
-														}
-														else
-														{
-															if (Objects.equals(barco.getTipoBarco(), "destructor"))
-															{
-																casillas[i][j].setBackground(Color.yellow);
-															}
-															else
-															{
-																if(Objects.equals(barco.getTipoBarco(), "fragata"))
-																{
-																	casillas[i][j].setBackground(Color.red);
-																}
-															}
-														}
-													}
+                            if (Objects.equals(barco.getTipoBarco(), "portavion")) {
+                                casillas[i][j].setBackground(Color.magenta);
+                            } else {
+                                if (Objects.equals(barco.getTipoBarco(), "submarino")) {
+                                    casillas[i][j].setBackground(Color.green);
+                                } else {
+                                    if (Objects.equals(barco.getTipoBarco(), "destructor")) {
+                                        casillas[i][j].setBackground(Color.yellow);
+                                    } else {
+                                        if (Objects.equals(barco.getTipoBarco(), "fragata")) {
+                                            casillas[i][j].setBackground(Color.red);
+                                        }
+                                    }
+                                }
+                            }
                             casillas[i][j].setTipo(barco.getTipoBarco());
 
                             casillaClickeada.setFila(i);
                             casillaClickeada.setColumna(j);
-													  casillas[i][j].removeActionListener(escucha);
+                            casillas[i][j].removeActionListener(escucha);
 
                             barco.setCasillas(barco.getCasillas() - 1);
                             barco.casillasDelBarco.add(new Casilla(casillaClickeada.getFila(), casillaClickeada.getColumna(), casillaClickeada.getTipo()));
