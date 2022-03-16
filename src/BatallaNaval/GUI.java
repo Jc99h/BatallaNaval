@@ -35,7 +35,7 @@ public class GUI extends JFrame {
         initGUI();
 
         //Default JFrame configuration
-        this.setTitle("The Title app");
+        this.setTitle("Batalla Naval");
         this.pack();
         this.setResizable(true);
         this.setVisible(true);
@@ -131,7 +131,6 @@ public class GUI extends JFrame {
 
                     botonPortavion = new JButton("Portavion: " + modelBatallaNaval.getCantidadPortavion());
 
-                    botonPortavion.setBackground(Color.gray);
                     if (portavionPuestos != 0) {
                         botonPortavion.addActionListener(escucha);
                         botonPortavion.setBackground(null);
@@ -143,7 +142,6 @@ public class GUI extends JFrame {
 
                     botonSubmarino = new JButton("Submarino: " + modelBatallaNaval.getCantidadSubmarino());
 
-                    botonSubmarino.setBackground(Color.gray);
                     if (submarinoPuestos != 0) {
                         botonSubmarino.addActionListener(escucha);
                         botonSubmarino.setBackground(null);
@@ -155,7 +153,6 @@ public class GUI extends JFrame {
 
                     botonDestructor = new JButton("Destructor: " + modelBatallaNaval.getCantidadDestructor());
 
-                    botonDestructor.setBackground(Color.gray);
                     if (destructorPuestos != 0) {
                         botonDestructor.addActionListener(escucha);
                         botonDestructor.setBackground(null);
@@ -167,7 +164,6 @@ public class GUI extends JFrame {
 
                     botonFragata = new JButton("Fragata: " + modelBatallaNaval.getCantidadFragata());
 
-                    botonFragata.setBackground(Color.gray);
                     if (fragataPuestos != 0) {
                         botonFragata.addActionListener(escucha);
                         botonFragata.setBackground(null);
@@ -184,6 +180,11 @@ public class GUI extends JFrame {
                 panelOpciones.add(mensaje, constraints);
             }
         }
+			  botonPortavion.setBackground(Color.magenta);
+				botonSubmarino.setBackground(Color.green);
+				botonDestructor.setBackground(Color.yellow);
+				botonFragata.setBackground(Color.red);
+
         revalidate();
         repaint();
     }
@@ -300,8 +301,36 @@ public class GUI extends JFrame {
                         casillaClickeada.setFila(i);
                         casillaClickeada.setColumna(j);
                         casillaClickeada.setTipo(barco.getTipoBarco());
+												casillas[i][j].removeActionListener(escucha);
 
-                        casillas[i][j].setBackground(Color.GREEN);
+												if(Objects.equals(barco.getTipoBarco(), "portavion"))
+												{
+													casillas[i][j].setBackground(Color.magenta);
+												}
+												else
+												{
+													if (Objects.equals(barco.getTipoBarco(), "submarino"))
+													{
+														casillas[i][j].setBackground(Color.green);
+													}
+													else
+													{
+														if (Objects.equals(barco.getTipoBarco(), "destructor"))
+														{
+															casillas[i][j].setBackground(Color.yellow);
+														}
+														else
+														{
+															if(Objects.equals(barco.getTipoBarco(), "fragata"))
+															{
+																casillas[i][j].setBackground(Color.red);
+															}
+														}
+													}
+												}
+
+
+                        //casillas[i][j].setBackground(Color.GREEN);
                         casillas[i][j].setValoresDeCasilla(casillaClickeada.getFila(), casillaClickeada.getColumna(), casillaClickeada.getTipo());
 
                         modelBatallaNaval.setFlag(modelBatallaNaval.getFlag() + 1);
@@ -317,8 +346,33 @@ public class GUI extends JFrame {
                             casillaClickeada.setFila(i);
                             casillaClickeada.setColumna(j);
                             casillaClickeada.setTipo(barco.getTipoBarco());
+													  casillas[i][j].removeActionListener(escucha);
 
-                            casillas[i][j].setBackground(Color.GREEN);
+													if(Objects.equals(barco.getTipoBarco(), "portavion"))
+													{
+														casillas[i][j].setBackground(Color.magenta);
+													}
+													else
+													{
+														if (Objects.equals(barco.getTipoBarco(), "submarino"))
+														{
+															casillas[i][j].setBackground(Color.green);
+														}
+														else
+														{
+															if (Objects.equals(barco.getTipoBarco(), "destructor"))
+															{
+																casillas[i][j].setBackground(Color.yellow);
+															}
+															else
+															{
+																if(Objects.equals(barco.getTipoBarco(), "fragata"))
+																{
+																	casillas[i][j].setBackground(Color.red);
+																}
+															}
+														}
+													}
                             casillas[i][j].setTipo(barco.getTipoBarco());
 
                             modelBatallaNaval.setFlag(modelBatallaNaval.getFlag() + 1);
@@ -331,11 +385,36 @@ public class GUI extends JFrame {
                         if (validarCasillaClickeada(barco, casillas[i][j], barco.getOrientacionBarco())) {
                             Casilla casillaClickeada = new Casilla(0, 0, "");
 
-                            casillas[i][j].setBackground(Color.GREEN);
+													if(Objects.equals(barco.getTipoBarco(), "portavion"))
+													{
+														casillas[i][j].setBackground(Color.magenta);
+													}
+													else
+													{
+														if (Objects.equals(barco.getTipoBarco(), "submarino"))
+														{
+															casillas[i][j].setBackground(Color.green);
+														}
+														else
+														{
+															if (Objects.equals(barco.getTipoBarco(), "destructor"))
+															{
+																casillas[i][j].setBackground(Color.yellow);
+															}
+															else
+															{
+																if(Objects.equals(barco.getTipoBarco(), "fragata"))
+																{
+																	casillas[i][j].setBackground(Color.red);
+																}
+															}
+														}
+													}
                             casillas[i][j].setTipo(barco.getTipoBarco());
 
                             casillaClickeada.setFila(i);
                             casillaClickeada.setColumna(j);
+													  casillas[i][j].removeActionListener(escucha);
 
                             barco.setCasillas(barco.getCasillas() - 1);
                             barco.casillasDelBarco.add(new Casilla(casillaClickeada.getFila(), casillaClickeada.getColumna(), casillaClickeada.getTipo()));
